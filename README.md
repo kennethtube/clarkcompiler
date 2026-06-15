@@ -1,7 +1,7 @@
-<h1 align="center">clarkcompiler</h1>
+<h1 align="center">clarkcompiler
 <div align="center">
-The moderative userdata compiler
-
+<i>The moderative userdata compiler</i>
+</h1>
 </div>
 
 ### Error Codes
