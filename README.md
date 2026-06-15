@@ -5,4 +5,4 @@
 </div>
 
 ### Error Codes
-100 - 
+100 - Outside intended bounds
