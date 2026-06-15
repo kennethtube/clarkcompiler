@@ -1,4 +1,4 @@
-<h1 align="center">clarkcompiler
+<h1 align="center">CLARKCOMPILER
 <div align="center">
 <i>The moderative userdata compiler</i>
 </h1>
