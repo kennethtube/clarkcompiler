@@ -20,9 +20,19 @@ def main():
     elif req=="owner":ownercount()
     elif req=="dupe":dupecheck()
     elif req=="raw":raw()
+    elif req=="help":helppage()
     else:
         print("Invalid input.")
         main()
+
+def helppage():
+    print("===== HELP PAGE =====")
+    print("Commands")
+    print("> item\n    └ Identifies the names of items within the targets inventory and the amount of times they appear.\n    └ [ITEM_ID]: [# POSSESSED]")
+    print("> owner\n    └ Identifies an items owner USERID within a targets inventory and the amount of times they appear.\n    └ [USER_ID]: [# POSSESSED]")
+    print("> dupe\n    └ Identifies repeat item owner USERID within a targets inventory, the name of the item, and the amount of times they appear.\n    └ [ITEM_ID] (ITEM_NAME): [# POSSESSED]")
+    print("> raw\n    └ Allows you to re-input the rawdata to compile from.\n")
+    main()
 
 def ownercount():
     global rData
