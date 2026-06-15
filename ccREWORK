@@ -9,20 +9,49 @@ def initialize():
     print("\nPlease input your raw data")
     rData=input(">>> ")
     rData=str(rData)
-    print(">>> Raw data saved\n")
+    print("\n>>> Raw data saved")
     main()
 
 def main():
-    req=input("\n>>> ")
+    req=input(">>> ")
     if req=="item":itemcount()
     elif req=="dupe":dupecheck()
     else: print("Invalid input.")
 
+def dupecheck():
+    global rData
+    content = rData
+    pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
+    matches = re.findall(pattern, content)
+    ids = [item_id for item_id, _ in matches]
+    counts = Counter(ids)
+
+    id_to_name = {}
+    for item_id, item_name in matches:
+        id_to_name[item_id] = item_name
+
+    duplicates = {
+        item_id: count
+        for item_id, count in counts.items()
+        if count > 1
+    }
+
+    print("\n===== DUPE RESULTS =====")
+    print(f"Total IDs found: {len(ids)}")
+    print(f"Unique IDs: {len(counts)}")
+    print("\n")
+
+    if duplicates:
+        for item_id, count in sorted(duplicates.items()):
+            print(f"> {item_id} ({id_to_name[item_id]}): {count}")
+    else:
+        print("\nNo duplicate IDs found.")
+    print("\n")
+    main()
+
 def itemcount():
     global rData
-
     content = rData
-
     pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
     matches = re.findall(pattern, content)
 
@@ -39,38 +68,5 @@ def itemcount():
     print()
     main()
 
-def dupecheck():
-    print("\n===== DUPE CHECK =====")
-    print("Paste your data below.")
-    print("When finished, type END on a new line and press Enter.\n")
-
-    lines = []
-    while True:
-        line = input()
-        if line.strip() == "END":
-            break
-        lines.append(line)
-
-    content = "\n".join(lines)
-    pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
-    matches = re.findall(pattern, content)
-    ids = [item_id for item_id, _ in matches]
-    counts = Counter(ids)
-
-    id_to_name = {}
-    for item_id, item_name in matches:
-        id_to_name[item_id] = item_name
-    duplicates = {item_id: count for item_id, count in counts.items() if count > 1}
-
-    print("\n===== DUPE RESULTS =====")
-    print(f"Total IDs found: {len(ids)}")
-    print(f"Unique IDs: {len(counts)}")
-
-    if duplicates:
-        print("\nDuplicate IDs found:")
-        for item_id, count in sorted(duplicates.items()):
-            print(f"{item_id} ({count} times) - {id_to_name[item_id]}")
-    else:
-        print("\nNo duplicate IDs found.")
-
+print("Error 100")
 initialize()
