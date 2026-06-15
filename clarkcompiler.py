@@ -1,12 +1,12 @@
 import re
 from collections import Counter
-# CLARK COMPILER by kenneytube
+# CLARK COMPILER by kenneth
 
-def initialize():
+def initialize(): #main open
     print("\n+-------------------------------------------------+\n|                  CLARK COMPILER                 |\n+-------------------------------------------------+")
     raw()
 
-def raw():
+def raw(): #rawdata input
     global rData
     print("\n> Please input your raw data")
     rData=input(">>> ")
@@ -14,10 +14,11 @@ def raw():
     print("\n> Raw data saved")
     main()
 
-def main():
+def main(): #command center
     req=input(">>> ")
     if req=="item":itemcount()
-    elif req=="owner":ownercount()
+    elif req=="allowner":allowners()
+    elif req=="owner":ownersearch()
     elif req=="dupe":dupecheck()
     elif req=="raw":raw()
     elif req=="help":helppage()
@@ -25,16 +26,16 @@ def main():
         print("Invalid input.")
         main()
 
-def helppage():
+def helppage(): #help page
     print("===== HELP PAGE =====")
     print("Commands")
     print("> item\n    └ Identifies the names of items within the targets inventory and the amount of times they appear.\n    └ [ITEM_ID]: [# POSSESSED]")
-    print("> owner\n    └ Identifies an items owner USERID within a targets inventory and the amount of times they appear.\n    └ [USER_ID]: [# POSSESSED]")
+    print("> allowner\n    └ Identifies all owners of items within the targets inventory and the amount of times they appear.\n    └ [USER_ID]: [# POSSESSED]")
     print("> dupe\n    └ Identifies repeat item owner USERID within a targets inventory, the name of the item, and the amount of times they appear.\n    └ [ITEM_ID] (ITEM_NAME): [# POSSESSED]")
     print("> raw\n    └ Allows you to re-input the rawdata to compile from.\n")
     main()
 
-def ownercount():
+def allowners(): #reveals owners
     global rData
     content = rData
     pattern = r'\[\\"(\d+)_\d+\.\d+\\",\\"([^"]+)\\"'
@@ -99,5 +100,5 @@ def dupecheck():
     print("\n")
     main()
 
-print("Error 100")
 initialize()
+print("Error 100")

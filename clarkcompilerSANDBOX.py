@@ -1,7 +1,6 @@
 import re
 from collections import Counter
-# CLARK COMPILER by kenneytube
-# version 1.5 12th june
+# CLARK COMPILER by kenneth
 
 def initialize():
     print("\n+-------------------------------------------------+\n|                  CLARK COMPILER                 |\n+-------------------------------------------------+")
@@ -18,14 +17,26 @@ def raw():
 def main():
     req=input(">>> ")
     if req=="item":itemcount()
-    elif req=="owner":ownercount()
+    elif req=="allowner":allowners()
+    elif req=="owner":ownersearch()
     elif req=="dupe":dupecheck()
     elif req=="raw":raw()
     else:
         print("Invalid input.")
         main()
 
-def ownercount():
+def ownersearch():
+    global rData
+    
+
+def dealersaver():
+    filename="dealerFile.txt"
+    openFile=True
+    linecount=1
+    edit=False
+    file=open(filename,"r")
+
+def allowners():
     global rData
     content = rData
     pattern = r'\[\\"(\d+)_\d+\.\d+\\",\\"([^"]+)\\"'
