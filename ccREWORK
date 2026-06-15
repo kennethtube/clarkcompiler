@@ -1,0 +1,76 @@
+import re
+from collections import Counter
+# CLARK COMPILER by kenneytube
+# version 1.5 12th june
+
+def initialize():
+    global rData
+    print("\n+-------------------------------------------------+\n|                  CLARK COMPILER                 |\n+-------------------------------------------------+")
+    print("\nPlease input your raw data")
+    rData=input(">>> ")
+    rData=str(rData)
+    print(">>> Raw data saved\n")
+    main()
+
+def main():
+    req=input("\n>>> ")
+    if req=="item":itemcount()
+    elif req=="dupe":dupecheck()
+    else: print("Invalid input.")
+
+def itemcount():
+    global rData
+
+    content = rData
+
+    pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
+    matches = re.findall(pattern, content)
+
+    item_names = [item_name for _, item_name in matches]
+    counts = Counter(item_names)
+
+    print("\n===== ITEM NAME COUNTS =====")
+    print(f"Total items found: {len(item_names)}")
+    print(f"Unique item names: {len(counts)}\n")
+
+    for name, count in sorted(counts.items(), key=lambda x: (-x[1], x[0])):
+        print(f"> {name}: {count}")
+
+    print()
+    main()
+
+def dupecheck():
+    print("\n===== DUPE CHECK =====")
+    print("Paste your data below.")
+    print("When finished, type END on a new line and press Enter.\n")
+
+    lines = []
+    while True:
+        line = input()
+        if line.strip() == "END":
+            break
+        lines.append(line)
+
+    content = "\n".join(lines)
+    pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
+    matches = re.findall(pattern, content)
+    ids = [item_id for item_id, _ in matches]
+    counts = Counter(ids)
+
+    id_to_name = {}
+    for item_id, item_name in matches:
+        id_to_name[item_id] = item_name
+    duplicates = {item_id: count for item_id, count in counts.items() if count > 1}
+
+    print("\n===== DUPE RESULTS =====")
+    print(f"Total IDs found: {len(ids)}")
+    print(f"Unique IDs: {len(counts)}")
+
+    if duplicates:
+        print("\nDuplicate IDs found:")
+        for item_id, count in sorted(duplicates.items()):
+            print(f"{item_id} ({count} times) - {id_to_name[item_id]}")
+    else:
+        print("\nNo duplicate IDs found.")
+
+initialize()
