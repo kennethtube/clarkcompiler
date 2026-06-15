@@ -33,8 +33,7 @@ def dupecheck():
     duplicates = {
         item_id: count
         for item_id, count in counts.items()
-        if count > 1
-    }
+        if count > 1}
 
     print("\n===== DUPE RESULTS =====")
     print(f"Total IDs found: {len(ids)}")
