@@ -2,11 +2,11 @@ import re
 from collections import Counter
 # CLARK COMPILER by kenneth
 
-def initialize():
+def initialize(): #main open
     print("\n+-------------------------------------------------+\n|                  CLARK COMPILER                 |\n+-------------------------------------------------+")
     raw()
 
-def raw():
+def raw(): #rawdata input
     global rData
     print("\n> Please input your raw data")
     rData=input(">>> ")
@@ -14,18 +14,37 @@ def raw():
     print("\n> Raw data saved")
     main()
 
-def main():
+def main(): #command center
     req=input(">>> ")
     req=req.lower()
-    if req=="item":itemcount()
-    elif req=="allowner":allowners()
-    elif req=="dupe":dupecheck()
+    if req=="items":itemcount()
+    elif req=="allowners":allowners()
+    elif req=="dupes":dupecheck()
     elif req=="raw":raw()
+    elif req=="help":helppage()
+    elif req=="showraw":
+        print(rData)
+        main()
+    elif req.startswith("searchowner "):
+        ownerID = req.split(" ", 1)[1]
+        searchOwner(ownerID)
     else:
         print("Invalid input.")
-        main()    
+        main()
 
-def allowners():
+def helppage(): #help page
+    print("===== HELP PAGE =====")
+    print("Commands")
+    print("> allowners\n    └ Identifies all owners of items within the targets inventory and the amount of times they appear.\n    └ [USER_ID]: [# POSSESSED]")
+    print("> dupes\n    └ Identifies repeat item owner USERID within a targets inventory, the name of the item, and the amount of times they appear.\n    └ [ITEM_ID] (ITEM_NAME): [# POSSESSED]")
+    print("> items\n    └ Identifies the names of items within the targets inventory and the amount of times they appear.\n    └ [ITEM_ID]: [# POSSESSED]")
+    print("> raw\n    └ Allows you to re-input the rawdata to compile from.\n")
+    print("> searchowners 1234567890\n    └ Identifies items with matching ownerIDs to the requested item.\n    └ [ITEM_ID] ([ITEMNAME])")
+
+    print("> showraw\n    └ Allows you to view the rawdata which is being compiled from.\n")
+    main()
+
+def allowners(): #reveals owners
     global rData
     content = rData
     pattern = r'\[\\"(\d+)_\d+\.\d+\\",\\"([^"]+)\\"'
@@ -42,7 +61,7 @@ def allowners():
     print("\n")
     main()
 
-def itemcount():
+def itemcount(): #shows all items 
     global rData
     content = rData
     pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
@@ -61,7 +80,7 @@ def itemcount():
     print()
     main()
 
-def dupecheck():
+def dupecheck(): #checks for duplicate itemIDs
     global rData
     content = rData
     pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
@@ -90,5 +109,30 @@ def dupecheck():
     print("\n")
     main()
 
-print("Error 100")
+def searchOwner(ownerID): #search by ownerID
+    global rData
+    content = rData
+    pattern = r'\[\\"(\d+_\d+\.\d+)\\",\\"([^"]+)\\"'
+    matches = re.findall(pattern, content)
+    owner_items = [
+        (item_id, item_name)
+        for item_id, item_name in matches
+        if item_id.split("_")[0] == ownerID]
+
+    item_names = [item_name for _, item_name in owner_items]
+    counts = Counter(item_names)
+
+    print(f"\n===== RESULTS FOR {ownerID} =====")
+    print(f"Total items found: {len(item_names)}")
+    print(f"Unique item names: {len(counts)}\n")
+
+    if not owner_items:
+        print("No items found.")
+        return
+
+    for item_id, item_name in owner_items:
+        print(f"> {item_id} ({item_name})")
+    main()
+
 initialize()
+print("Error 100")
