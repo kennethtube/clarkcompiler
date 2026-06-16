@@ -16,9 +16,9 @@ def raw(): #rawdata input
 
 def main(): #command center
     req=input(">>> ")
+    req=req.lower()
     if req=="item":itemcount()
     elif req=="allowner":allowners()
-    elif req=="owner":ownersearch()
     elif req=="dupe":dupecheck()
     elif req=="raw":raw()
     elif req=="help":helppage()

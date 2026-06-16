@@ -16,25 +16,14 @@ def raw():
 
 def main():
     req=input(">>> ")
+    req=req.lower()
     if req=="item":itemcount()
     elif req=="allowner":allowners()
-    elif req=="owner":ownersearch()
     elif req=="dupe":dupecheck()
     elif req=="raw":raw()
     else:
         print("Invalid input.")
-        main()
-
-def ownersearch():
-    global rData
-    
-
-def dealersaver():
-    filename="dealerFile.txt"
-    openFile=True
-    linecount=1
-    edit=False
-    file=open(filename,"r")
+        main()    
 
 def allowners():
     global rData
