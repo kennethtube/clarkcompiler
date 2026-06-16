@@ -20,6 +20,9 @@ def main():
     if req=="item":print("blub")
 ###
     elif req=="findowner":findowner()
+    elif req=="showraw":
+        print(rData)
+        main()
 ###
     elif req=="raw":raw()
     else:
