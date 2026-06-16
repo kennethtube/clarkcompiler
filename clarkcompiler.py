@@ -42,7 +42,7 @@ def helppage(): #help page
     print("> allowners\n    └ Identifies all owners of items within the targets inventory and the amount of times they appear.\n    └ [USER_ID]: [# POSSESSED]")
     print("> dupes\n    └ Identifies repeat item owner USERID within a targets inventory, the name of the item, and the amount of times they appear.\n    └ [ITEM_ID] (ITEM_NAME): [# POSSESSED]")
     print("> items\n    └ Identifies the names of items within the targets inventory and the amount of times they appear.\n    └ [ITEM_ID]: [# POSSESSED]")
-    print("> raw\n    └ Allows you to re-input the rawdata to compile from.\n")
+    print("> raw\n    └ Allows you to re-input the rawdata to compile from.")
     print("> searchitems ONLYTWENTYCHARACTERS\n    └ Identifies items with matching item names to the requested item (ignores capitalization).\n    └ [ITEM_ID] ([ITEMNAME])")
     print("> searchowners 1234567890\n    └ Identifies items with matching ownerIDs to the requested item.\n    └ [ITEM_ID] ([ITEMNAME])")
     print("> showraw\n    └ Allows you to view the rawdata which is being compiled from.\n")
