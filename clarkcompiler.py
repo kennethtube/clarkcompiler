@@ -122,8 +122,7 @@ def searchitem(itemName): #search by itemName
     found_items = [
         (item_id, name)
         for item_id, name in matches
-        if name.lower() == itemName.lower()
-    ]
+        if name.lower() == itemName.lower()]
 
     def sort_key(item):
         item_id = item[0]
