@@ -162,7 +162,6 @@ def searchOwner(ownerID): #search by ownerID
 
     if not owner_items:
         print("No items found.")
-        return
 
     for item_id, item_name in owner_items:
         print(f"> {item_id} ({item_name})")

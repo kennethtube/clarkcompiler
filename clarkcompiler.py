@@ -42,7 +42,7 @@ def helppage(): #help page
     print("> allowners\n    └ Identifies all owners of items within the targets inventory and the amount of times they appear.\n    └ [USER_ID]: [# POSSESSED]")
     print("> dupes\n    └ Identifies repeat item owner USERID within a targets inventory, the name of the item, and the amount of times they appear.\n    └ [ITEM_ID] (ITEM_NAME): [# POSSESSED]")
     print("> items\n    └ Identifies the names of items within the targets inventory and the amount of times they appear.\n    └ [ITEM_ID]: [# POSSESSED]")
-    print("> raw\n    └ Allows you to re-input the rawdata to compile from.")
+    print("> raw\n    └ Allows you to re-input the rawdata to compile from.\n")
     print("> searchitems ONLYTWENTYCHARACTERS\n    └ Identifies items with matching item names to the requested item (ignores capitalization).\n    └ [ITEM_ID] ([ITEMNAME])")
     print("> searchowners 1234567890\n    └ Identifies items with matching ownerIDs to the requested item.\n    └ [ITEM_ID] ([ITEMNAME])")
     print("> showraw\n    └ Allows you to view the rawdata which is being compiled from.\n")
@@ -122,7 +122,8 @@ def searchitem(itemName): #search by itemName
     found_items = [
         (item_id, name)
         for item_id, name in matches
-        if name.lower() == itemName.lower()]
+        if name.lower() == itemName.lower()
+    ]
 
     def sort_key(item):
         item_id = item[0]
@@ -161,7 +162,6 @@ def searchOwner(ownerID): #search by ownerID
 
     if not owner_items:
         print("No items found.")
-        return
 
     for item_id, item_name in owner_items:
         print(f"> {item_id} ({item_name})")
